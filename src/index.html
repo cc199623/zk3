@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>周考三</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div class="wrap">
+        <h3>我的电脑</h3>
+        <ul>
+            <li>
+                <p><span>-</span>c:</p>
+                <ul>
+                    <li>a.txt</li>
+                    <li>
+                        常用
+                        <span>b.txt</span>
+                        <span>c.html</span>
+                    </li>
+                    <li>
+                        程序
+                        <span>教学</span>
+                        <span>demo</span>
+                    </li>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script>
+        $(function(){
+
+            $.ajax({
+                url:'/login',
+                type:'GET',
+                success:function(res){
+                    console.log(res)
+                },
+                error:function(error){
+                    console.log(error)
+                }
+            })
+        })
+
+
+    </script>
+</body>
+</html>
