@@ -3,50 +3,135 @@
 <head>
     <meta charset="UTF-8" />
     <title>周考三</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
     <div class="wrap">
-        <h3>我的电脑</h3>
-        <ul>
+    <h3 class="tits">我的电脑</h3>
+        <!-- <script type="text/x-handlebars-template" class="tit">
+            <h3 class="tits">{{name}}</h3>
+        </script> -->
+        <ul class="ulist">
             <li>
-                <p><span>-</span>c:</p>
-                <ul>
-                    <li>a.txt</li>
+                <p class="two"><span>-</span>c:</p>
+                <ul class="two-lis">
                     <li>
-                        常用
-                        <span>b.txt</span>
-                        <span>c.html</span>
+                        <p class="move"><span>-</span>影音</p>
+                        <ul>
+                            <li>b.txt</li>
+                            <li>c.html</li>
+                        </ul>
                     </li>
                     <li>
-                        程序
-                        <span>教学</span>
-                        <span>demo</span>
+                        <p class="com"><span>-</span>游戏</p>
+                        <ul>
+                            <li>LOL</li>
+                        </ul>
+
                     </li>
-                    <li></li>
                 </ul>
             </li>
-        </ul>
+            <li>
+                <p class="two"><span>-</span>c:</p>
+                <ul class="two-lis">
+                    <li>
+                        <p class="move"><span>-</span>影音</p>
+                        <ul>
+                            <li金刚</li>
+                            <li>冰河时代</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="com"><span>-</span>游戏</p>
+                        <ul>
+                            <li>教学</li>
+                            <li>demo</li>
+                        </ul>
 
+                    </li>
+                </ul>
+            </li>
+            <!-- <script type="text/x-handlebars-template" id="tit">
+                {{#each this}}
+                <li>
+                    <p class="one">{{name}}</p>
+                    <ul class="one-lis">
+                        <li>a.txt</li>
+                        <li>
+                            <p class="cheng"><span>-</span>常用</p>
+                            <ul>
+                                <li>b.txt</li>
+                                <li>c.html</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="xu"><span>-</span>程序</p>
+                            <ul>
+                                <li>教学</li>
+                                <li>demo</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                {{/each}}
+                </ul>
+            </script> -->
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/handlebars.js"></script>
     <script>
-        $(function(){
+    $(function(){
 
             $.ajax({
-                url:'/login',
+                url:'/list',
                 type:'GET',
                 success:function(res){
-                    console.log(res)
+                    //console.log(res)
+                    var data = JSON.parse(res);
+                    console.log(data)
+                    templat(data)
                 },
                 error:function(error){
                     console.log(error)
                 }
             })
+
+        $('.one').on('click',function(){
+            $('.one-lis').toggle()
+        })
+        $('.cheng').on('click',function(){
+            $(this).siblings().toggle()
+        })
+        $('.xu').on('click',function(){
+            $(this).siblings().toggle()
+        })
+        $('.tit').on('click',function(){
+            $(this).siblings().children('li').toggle()
+        })
+        $('.two').on('click',function(){
+            $('.two-lis').toggle()
+        })
+        $('.move').on('click',function(){
+            $(this).siblings().toggle()
+        })
+        $('.com').on('click',function(){
+            $(this).siblings().toggle()
         })
 
 
+        function templat(data){
+            var tit = $('#tit').html();
+            var tem = Handlebars.compile(tit);
+
+            var htmls = tem(data)
+            //console.log(data)
+            $('.ulist').html(htmls)
+        }
+
+    })
     </script>
 </body>
 </html>
